@@ -50,7 +50,7 @@
     </div>
   
     
-    <?php submit_button(); ?>
+    <?php submit_button('Zapisz ustawienia'); ?>
 
 </form>
 </div>
