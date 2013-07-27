@@ -100,6 +100,9 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
      * Akcje Wordpress
      *************************************************************/
     
+    /**
+     * @see http://codex.wordpress.org/Plugin_API/Action_Reference/init
+     */
     public function init()
     {
         if (!session_id()) {
@@ -107,6 +110,9 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
         }
     }
     
+    /**
+     * @see http://codex.wordpress.org/Function_Reference/register_activation_hook
+     */    
     public function activate_plugin()
     {
         foreach($this->plugin_options as $option) {
@@ -114,6 +120,9 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
         }        
     }
     
+    /**
+     * @see http://codex.wordpress.org/Function_Reference/register_deactivation_hook
+     */    
     public function deactivate_plugin()
     {
         foreach($this->plugin_options as $option) {
@@ -121,6 +130,9 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
         }
     }
     
+    /**
+     * @see http://codex.wordpress.org/Plugin_API/Action_Reference/admin_menu
+     */
     public function admin_menu()
     {   
         add_options_page(
@@ -134,6 +146,9 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
         );
     }
     
+    /**
+     * @see http://codex.wordpress.org/Plugin_API/Action_Reference/admin_init
+     */
     public function admin_init()
     {
         foreach ($this->plugin_options as $option) {
@@ -141,6 +156,9 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
         }
     }    
     
+    /**
+     * @see http://codex.wordpress.org/Plugin_API/Action_Reference/admin_notices
+     */
     public function admin_notices()
     {
         $admin_messages = $_SESSION['si_admin_messages'];
@@ -153,6 +171,9 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
         $_SESSION['si_admin_messages'] = Array();
     }
     
+    /**
+     * @see http://codex.wordpress.org/Plugin_API/Action_Reference/publish_post
+     */
     public function publish_post($post_ID)
     {
         if ($this->get_option('auto_publish')) {
@@ -160,6 +181,9 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
         }
     }
     
+    /**
+     * @see http://codex.wordpress.org/Plugin_API/Action_Reference/add_meta_boxes
+     */
     public function add_meta_boxes()
     {
         add_meta_box( 
@@ -174,6 +198,9 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
         );
     }
     
+    /**
+     * @see http://codex.wordpress.org/Plugin_API/Action_Reference/wp_ajax_%28action%29
+     */
     public function wp_ajax_strims_post()
     {
         StrimsIntegrator::get_instance()->ajax_post_link();        
