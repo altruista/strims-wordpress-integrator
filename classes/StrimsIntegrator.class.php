@@ -65,7 +65,8 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
         $post = get_post($post_ID);
         
         $url = $post->guid;
-        $url = str_replace('localhost', 'google.pl', $url);
+        // testy
+        //$url = str_replace('localhost', 'google.pl', $url);
                 
         $result = $this->API()->post_link($strim ? $strim : $options['default_strim'], $post->post_title, $url);
         if ($result == FALSE) {

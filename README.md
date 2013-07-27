@@ -15,4 +15,5 @@ Strim PHP: http://strims.pl/s/PHP
 
 #### Licencja:
 GNU GENERAL PUBLIC LICENSE
+
 http://www.gnu.org/licenses/gpl.txt
