@@ -46,7 +46,7 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
     }
     
     /**
-     * Jeśli TRUE wiadomości nie będą generaowane
+     * Jeśli TRUE wiadomości nie będą generowane
      * @var bool
      */
     private $_silent = false;
@@ -83,10 +83,18 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
         if(!$this->_silent) $this->add_admin_message('Dodano treść do Strims.pl: <a href="http://strims.pl/t/'.$result.'">link</a>');        
     }
     
+    /**
+     * Obsługa ajax - dodawanie linku
+     */
     public function ajax_post_link()
     {
+        // jako że to ajax nie chcemy generować żadnych wiadomości
         $this->_silent = true;
+        
+        // dodajemy link
         $result = $this->post_link($_POST['post_ID'], $_POST['strim']);
+        
+        // wypluwamy rezultat json
         $result = $result ? Array('ok' => 1, 'id' => $result) : Array('ok' => 0);
         echo json_encode($result);
         exit ;
