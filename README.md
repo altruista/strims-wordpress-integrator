@@ -10,7 +10,7 @@ Dyskusja: -
 
 Strim PHP: http://strims.pl/s/PHP
 
-#### Autory:
+#### Autor:
 - http://strims.pl/u/altruista
 
 #### Licencja:
