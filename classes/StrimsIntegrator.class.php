@@ -82,11 +82,13 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
         // ups.
         if ($result == FALSE) {
             if(!$this->_silent) $this->add_admin_message('Nie udało się dodać treści do strimu na strims.pl (już istnieje albo brak uprawnień)');
-            return ;
+            return FALSE;
         }
         
         // udało się
         if(!$this->_silent) $this->add_admin_message('Dodano treść do Strims.pl: <a href="http://strims.pl/t/'.$result.'">link</a>');        
+        
+        return TRUE;
     }
     
     /**
