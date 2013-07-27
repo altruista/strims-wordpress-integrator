@@ -58,28 +58,36 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
      */
     public function post_link($post_ID, $strim = false)
     {
+        // sprawdzamy opcje czy jest dostepny login i haslo
         $options = $this->get_options();
         if (empty($options['username']) || empty($options['password'])) {
             if(!$this->_silent) $this->add_admin_message('Ustaw login i hasło w Ustawienia &gt; Strims Integrator aby automatycznie dodawać treści na Strims.pl');            
             return;
         }        
         
+        // logowanie
         if (!$this->API()->login($options['username'], $options['password'])) {
             if(!$this->_silent) $this->add_admin_message('Nie mogę się zalogować do Strims.pl jako ' . $options['username']);
             return;
         }
+        
+        // póki co wszystko OK,
+        // pobieramy wpis z bazy WP
         $post = get_post($post_ID);
         
-        $url = $post->guid;
-        // testy
-        //$url = str_replace('localhost', 'google.pl', $url);
+        $url = $post->guid;        
+        //$url = str_replace('localhost', 'google.pl', $url); // do testów na localhost
                 
+        // wszystko gotowe, dodajemy treść
         $result = $this->API()->post_link($strim ? $strim : $options['default_strim'], $post->post_title, $url);
+        
+        // ups.
         if ($result == FALSE) {
             if(!$this->_silent) $this->add_admin_message('Nie udało się dodać treści do strimu na strims.pl (już istnieje albo brak uprawnień)');
             return ;
         }
         
+        // udało się
         if(!$this->_silent) $this->add_admin_message('Dodano treść do Strims.pl: <a href="http://strims.pl/t/'.$result.'">link</a>');        
     }
     
