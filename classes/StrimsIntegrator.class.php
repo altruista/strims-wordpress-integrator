@@ -33,9 +33,7 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
         $post = get_post($post_ID);
         $data['options'] = $this->get_options();
         $data['post_ID'] = $post->ID;
-        $data['post_status'] = get_post_status($post_ID);
-        
-        
+        $data['post_status'] = get_post_status($post_ID);        
         $data['manual_post_url'] = "http://strims.pl/dodaj?".http_build_query(Array(
             'tytul' => $post->post_title,
             'url'   => $post->guid,
