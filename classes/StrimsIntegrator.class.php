@@ -46,6 +46,12 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
     }
     
     /**
+     * Jeśli TRUE wiadomości nie będą generaowane
+     * @var bool
+     */
+    private $_silent = false;
+    
+    /**
      * Główna funkcja dodająca treść na Strims.pl na podstawie wpisu z 
      * @param integer $post_ID id wpisu WP
      * @param string $strim nazwa strimu
@@ -54,12 +60,12 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
     {
         $options = $this->get_options();
         if (empty($options['username']) || empty($options['password'])) {
-            $this->add_admin_message('Ustaw login i hasło w Ustawienia &gt; Strims Integrator aby automatycznie dodawać treści na Strims.pl');
+            if(!$this->_silent) $this->add_admin_message('Ustaw login i hasło w Ustawienia &gt; Strims Integrator aby automatycznie dodawać treści na Strims.pl');            
             return;
         }        
         
         if (!$this->API()->login($options['username'], $options['password'])) {
-            $this->add_admin_message('Nie mogę się zalogować do Strims.pl jako ' . $options['username']);
+            if(!$this->_silent) $this->add_admin_message('Nie mogę się zalogować do Strims.pl jako ' . $options['username']);
             return;
         }
         $post = get_post($post_ID);
@@ -70,15 +76,16 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
                 
         $result = $this->API()->post_link($strim ? $strim : $options['default_strim'], $post->post_title, $url);
         if ($result == FALSE) {
-            $this->add_admin_message('Nie udało się dodać treści do strimu na strims.pl (już istnieje albo brak uprawnień)');
+            if(!$this->_silent) $this->add_admin_message('Nie udało się dodać treści do strimu na strims.pl (już istnieje albo brak uprawnień)');
             return ;
         }
         
-        $this->add_admin_message('Dodano treść do Strims.pl: <a href="http://strims.pl/t/'.$result.'">link</a>');        
+        if(!$this->_silent) $this->add_admin_message('Dodano treść do Strims.pl: <a href="http://strims.pl/t/'.$result.'">link</a>');        
     }
     
     public function ajax_post_link()
     {
+        $this->_silent = true;
         $result = $this->post_link($_POST['post_ID'], $_POST['strim']);
         $result = $result ? Array('ok' => 1, 'id' => $result) : Array('ok' => 0);
         echo json_encode($result);
