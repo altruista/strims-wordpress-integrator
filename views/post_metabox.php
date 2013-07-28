@@ -27,7 +27,6 @@ Opublikuj post aby móc go dodać do <a href="http://strims.pl" target="_blank">
 
 <script>
     
-    var post_script_url = '<?php echo plugins_url('strims-integrator'); ?>';
     var post_ID = '<?php echo $post_ID; ?>';
         
     jQuery('#submit').click(function(e){
