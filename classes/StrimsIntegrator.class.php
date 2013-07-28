@@ -16,7 +16,7 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
     /**
      * Strona edycji ustawień
      */
-    public function plugin_options_edit()
+    public function display_plugin_options_edit()
     {
         $data = Array(
             'form' => $this->get_options()
@@ -27,7 +27,7 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
     /**
      * Okienko przy publikacji postu
      */
-    public function post_metabox($post_ID)
+    public function display_post_metabox($post_ID)
     {
         $data = Array();        
         $post = get_post($post_ID);
@@ -42,6 +42,23 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
         
         echo $this->load_view("post_metabox", $data);
     }
+    
+    /**
+     * Obsługa ajax - dodawanie linku
+     */
+    public function ajax_post_link()
+    {
+        // jako że to ajax nie chcemy generować żadnych wiadomości
+        $this->_silent = true;
+        
+        // dodajemy link
+        $result = $this->post_link($_POST['post_ID'], $_POST['strim']);
+        
+        // wypluwamy rezultat json
+        $result = $result ? Array('ok' => 1, 'id' => $result) : Array('ok' => 0);
+        echo json_encode($result);
+        exit ;
+    }    
     
     /**
      * Jeśli TRUE wiadomości nie będą generowane
@@ -90,21 +107,5 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
         
         return TRUE;
     }
-    
-    /**
-     * Obsługa ajax - dodawanie linku
-     */
-    public function ajax_post_link()
-    {
-        // jako że to ajax nie chcemy generować żadnych wiadomości
-        $this->_silent = true;
-        
-        // dodajemy link
-        $result = $this->post_link($_POST['post_ID'], $_POST['strim']);
-        
-        // wypluwamy rezultat json
-        $result = $result ? Array('ok' => 1, 'id' => $result) : Array('ok' => 0);
-        echo json_encode($result);
-        exit ;
-    }
+
 }

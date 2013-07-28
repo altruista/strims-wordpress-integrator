@@ -158,7 +158,7 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
             'administrator',
             'strims-integrator', 
             function() {
-                StrimsIntegrator::get_instance()->plugin_options_edit();
+                StrimsIntegrator::get_instance()->display_plugin_options_edit();
             }
         );
     }
@@ -207,7 +207,7 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
             'si_metabox',
             'Strims.pl integrator',
             function($post_ID) {
-                StrimsIntegrator::get_instance()->post_metabox($post_ID);
+                StrimsIntegrator::get_instance()->display_post_metabox($post_ID);
             },
             'post',
             'side',
