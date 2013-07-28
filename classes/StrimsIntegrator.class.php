@@ -49,6 +49,7 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
     public function ajax_post_link()
     {
         // jako że to ajax nie chcemy generować żadnych wiadomości
+        // TODO: usunąć, methoda post_link() powinna zwracać cały rezultat
         $this->_silent = true;
         
         // dodajemy link
@@ -62,14 +63,18 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
     
     /**
      * Jeśli TRUE wiadomości nie będą generowane
+     * TODO: usunąć, obsługa wiadomości powinna być tylko w action_publish_post
      * @var bool
      */
     private $_silent = false;
     
     /**
      * Główna funkcja dodająca treść na Strims.pl na podstawie wpisu z 
+     * TODO: usunąć, obsługa wiadomości powinna być tylko w action_publish_post
+     * TODO: to powinno zwracać coś więcej niż TRUE/FALSE
      * @param integer $post_ID id wpisu WP
      * @param string $strim nazwa strimu
+     * @return bool
      */
     public function post_link($post_ID, $strim = false)
     {
