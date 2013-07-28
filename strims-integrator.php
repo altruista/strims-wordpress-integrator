@@ -2,7 +2,7 @@
 /*
 Plugin Name: Strims integrator
 Plugin URI: https://github.com/altruista/strims-wordpress-integrator/
-Description: Pochwal się sowim blogiem i zwiększ ilość odwiedzin przez automatyczne dodawanie linków do swojego bloga na strims.pl
+Description: Pochwal się swoim blogiem i zwiększ ilość odwiedzin przez automatyczne dodawanie linków do swojego bloga na strims.pl
 Version: 1.0
 Author: altruista
 Author URI: http://strims.pl/u/altruista
