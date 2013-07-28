@@ -4,6 +4,7 @@ Plugin URI: http://strims.pl/s/PHP/t/0o63ys/wtyczka-wordpress-dla-strimspl
 Tags: social
 Requires at least: 2.7
 Tested up to: 3.4
+Stable tag: trunk
 License: GPL
 License URI: http://www.gnu.org/licenses/gpl.txt
 
