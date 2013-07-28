@@ -193,6 +193,7 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
      */
     protected function action_publish_post($post_ID)
     {
+        // na to powinna być osobna metoda w StrimsIntegrator z obsługą wiadomości
         if ($this->get_option('auto_publish')) {
             StrimsIntegrator::get_instance()->post_link($post_ID);
         }
