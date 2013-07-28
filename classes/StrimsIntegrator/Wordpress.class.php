@@ -34,6 +34,7 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
     
     /**
      * Akcje WP które wtyczka obsługuje
+     * TODO: to mogłoby samo się uzupełniać w konstruktorze
      * @var array
      */
     protected $plugin_actions = Array(
