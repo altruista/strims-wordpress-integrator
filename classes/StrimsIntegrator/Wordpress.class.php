@@ -68,9 +68,25 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
      */
     public function register_actions()
     {        
-        foreach($this->plugin_actions as $action) {                                    
-            add_action($action, Array($this, $action));
+        foreach($this->plugin_actions as $action) {                                                
+            add_action($action, function() use($action) {
+                StrimsIntegratorWordpress::get_instance()->trigger_action($action, func_get_args());                
+            });
         }        
+    }
+    
+    /**
+     * Obsługa akcji Wordpress
+     * @param string $action nazwa akcji np. "admin_menu"
+     * @param array $arguments argumenty akcji
+     */
+    public function trigger_action($action, $arguments)
+    {
+        $method_name = "action_{$action}";
+        if (!method_exists($this, $method_name)) {
+            throw Exception("StrimsIntegrator: Undefined action {$action}");
+        }
+        call_user_func_array(Array($this, $method_name), $arguments);
     }
     
     /**
@@ -101,16 +117,6 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
      *************************************************************/
     
     /**
-     * @see http://codex.wordpress.org/Plugin_API/Action_Reference/init
-     */
-    public function init()
-    {
-        if (!session_id()) {
-            session_start();
-        }
-    }
-    
-    /**
      * @see http://codex.wordpress.org/Function_Reference/register_activation_hook
      */    
     public function activate_plugin()
@@ -131,9 +137,19 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
     }
     
     /**
+     * @see http://codex.wordpress.org/Plugin_API/Action_Reference/init
+     */
+    protected function action_init()
+    {
+        if (!session_id()) {
+            session_start();
+        }
+    }    
+    
+    /**
      * @see http://codex.wordpress.org/Plugin_API/Action_Reference/admin_menu
      */
-    public function admin_menu()
+    protected function action_admin_menu()
     {   
         add_options_page(
             'Strims Integrator', 
@@ -149,7 +165,7 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
     /**
      * @see http://codex.wordpress.org/Plugin_API/Action_Reference/admin_init
      */
-    public function admin_init()
+    protected function action_admin_init()
     {
         foreach ($this->plugin_options as $option) {
             register_setting('si-options', $this->plugin_options_prefix . $option);
@@ -159,7 +175,7 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
     /**
      * @see http://codex.wordpress.org/Plugin_API/Action_Reference/admin_notices
      */
-    public function admin_notices()
+    protected function action_admin_notices()
     {
         $admin_messages = $_SESSION['si_admin_messages'];
         if (empty($admin_messages)) {
@@ -174,7 +190,7 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
     /**
      * @see http://codex.wordpress.org/Plugin_API/Action_Reference/publish_post
      */
-    public function publish_post($post_ID)
+    protected function action_publish_post($post_ID)
     {
         if ($this->get_option('auto_publish')) {
             StrimsIntegrator::get_instance()->post_link($post_ID);
@@ -184,7 +200,7 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
     /**
      * @see http://codex.wordpress.org/Plugin_API/Action_Reference/add_meta_boxes
      */
-    public function add_meta_boxes()
+    protected function action_add_meta_boxes()
     {
         add_meta_box( 
             'si_metabox',
@@ -201,7 +217,7 @@ class StrimsIntegratorWordpress extends StrimsIntegratorBase
     /**
      * @see http://codex.wordpress.org/Plugin_API/Action_Reference/wp_ajax_%28action%29
      */
-    public function wp_ajax_strims_post()
+    protected function action_wp_ajax_strims_post()
     {
         StrimsIntegrator::get_instance()->ajax_post_link();        
     }
