@@ -55,7 +55,7 @@ class StrimsIntegrator extends StrimsIntegratorWordpress
         $result = $this->post_link($_POST['post_ID'], $_POST['strim']);
         
         // wypluwamy rezultat json
-        $result = $result ? Array('ok' => 1, 'id' => $result) : Array('ok' => 0);
+        $result = Array('ok' => $result ? 1 : 0);
         echo json_encode($result);
         exit ;
     }    
