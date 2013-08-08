@@ -44,9 +44,9 @@ Zachcęcam do współtworzenia https://github.com/altruista/strims-wordpress-int
 
 == Screenshots ==
 
-1. assets/screenshot-1.png
-2. assets/screenshot-2.png
-3. assets/screenshot-3.png
+1. http://plugins.svn.wordpress.org/strims-wp-integrator/trunk/assets/screenshot-1.png
+2. http://plugins.svn.wordpress.org/strims-wp-integrator/trunk/assets/screenshot-2.png
+3. http://plugins.svn.wordpress.org/strims-wp-integrator/trunk/assets/screenshot-3.png
 
 == Changelog ==
 
