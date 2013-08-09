@@ -7,15 +7,15 @@ Wtyczka pozwala na dodawanie wpisów z bloga do strimów na Strims.pl:
 
 **Strona ustawień wtyczki**
 
-![Zrzut ekranu 1](https://raw.github.com/altruista/strims-wordpress-integrator/master/assets/screenshot-1.png)
+![Zrzut ekranu 1](https://raw.github.com/altruista/strims-wordpress-integrator/master/screenshot-1.png)
 
 **Automatyczne dodawanie**
 
-![Zrzut ekranu 2](https://raw.github.com/altruista/strims-wordpress-integrator/master/assets/screenshot-2.png)
+![Zrzut ekranu 2](https://raw.github.com/altruista/strims-wordpress-integrator/master/screenshot-2.png)
 
 **Boks do ręcznego dodawania**
 
-![Zrzut ekranu 3](https://raw.github.com/altruista/strims-wordpress-integrator/master/assets/screenshot-3.png)
+![Zrzut ekranu 3](https://raw.github.com/altruista/strims-wordpress-integrator/master/screenshot-3.png)
 
 #### Wymagania:
 - PHP >= 5.3
